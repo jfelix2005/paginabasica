@@ -1,0 +1,7 @@
+//querySelector
+
+
+//querySelectorAll  
+
+//getElementById 
+

@@ -1,0 +1,102 @@
+
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="es-mx">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>eco2biz : Carga Masiva de Monitoreo</title>
+<link rel="stylesheet" type="text/css" href="Estilos/IntraStyles.css">
+<link href="estilo/estilo.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body bgcolor="#ffffff">
+<!--
+Modificado por Jorge Felix
+Comentario: 'Se agrego replace para evitar comillas simples en comentario
+Fecha: 13/10/2021
+-->
+
+    <form Name="frmCargos" Action="Carga_Masiva_Lista_Objetos.asp" Method="POST"  ENCTYPE="multipart/form-data">
+    <input type="Hidden" name="Code" value="<%=Code%>">
+    <input type="Hidden" name="Acc" value="<%=Acc%>">
+    <input type="Hidden" name="Id_Unidad" value="<%=Id_Unidad%>">
+    <input type="Hidden" name="Id_Usuario" value="<%=wId_Usuario%>">
+    <input type="Hidden" name="Empresa" value="<%=wEmpresa%>">
+    <input type="Hidden" name="wGrupo" value="<%=wGrupo%>">
+    <input type="Hidden" name="wcodigo_ticket" value="<%=wcodigo_ticket%>">
+  
+    <br>
+
+ <table width=800 align=center>
+    <tr>
+    <td>
+    <table border="0" cellspacing="0" cellpadding="0" width="600" bgcolor="#ffffff" class=dos>
+					<tr>
+				      <th colspan=2 height=30 align="Left" valign=middle class=Header>&nbsp;<b>CARGA MASIVA : OBJETOS MODIFICADOS</b></th>
+					</tr>	
+			    <tbody>   
+
+			    <tr>
+				      <td width="200" height=22 align="right" class=row1><b>Archivo Excel: </b></td>
+				      <td class=row1 align=left>
+				      <input TYPE="file" name="ArchivoFoto" SIZE="44%" class=txtcombo>
+                      </td>
+			    </tr>			   
+	
+			    <tr>
+				    <td align=center Colspan="4" class=row1 height=30><input type="button" value="Cargar Archivo" id=button1 name=button1 onclick="javascript:EjecutaAccion('Load');"></td>
+			    </tr>
+                <tr>
+				      <td colspan=2  height=22 align="center" class=row1>
+                        <% 'If wRsCargas("Titulo_CargaMasiva") = "Punto_Monitoreo" Then %>
+                            Plantilla de Ejemplo de Carga Masiva Temporal<a href="ayuda/plantilla_carga_masiva_objetos.xls" target="_blank" ><b> Descargar</b></a>
+                        <% 'End If %>
+				      </td>
+			    </tr>
+				<tbody>
+	</table>
+    </td>
+    </tr>
+</table>
+</body>
+</form>
+
+</html>
+
+<script LANGUAGE="JavaScript">
+
+	function EjecutaAccion(Acc)
+	{
+        if (Acc=="Load")
+        {
+		    frmCargos.Acc.value=Acc; 
+		    frmCargos.submit();
+		 }
+		 else{
+            ajaxindicatorstop();
+		    alert("No se puede grabar el archivo por que tiene errores. Corrijalos y vuelva a cargarlo.");
+		 }   
+	}
+
+</script>
+
+<script type="text/javascript">
+
+    if ("<%=wError%>" == "2") { 
+        alert("Formato fecha incorrecto. Por favor cargue un archivo el formato correcto");
+    }
+     if ("<%=wError%>" == "1") { 
+        alert("No se pudo cargar tabla residuos ");
+    } 
+    if ("<%=CargaExito%>" == "1") {
+        alert("CARGA DE ARCHIVO EXITOSA");
+    }
+    if ("<%=CargaExito%>" == "0") {
+        var msg_error = "NO SE PUDO CARGAR DATOS: " + "<%=wMensajeError%>";
+        alert(msg_error);
+    }
+    
+</script>
